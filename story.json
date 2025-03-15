@@ -1,0 +1,28 @@
+{
+    "intro": {
+        "text": "You are a cybersecurity analyst monitoring network traffic when you detect unusual activity.",
+        "options": {
+            "1": "Investigate logs",
+            "2": "Ignore the warning",
+            "3": "Shut down the affected server"
+        },
+        "next": {
+            "1": "investigate_logs",
+            "2": "ignore_warning",
+            "3": "shutdown_server"
+        }
+    },
+    "investigate_logs": {
+        "text": "You discover encrypted data packets being sent to an unknown server.",
+        "options": {
+            "1": "Trace the source",
+            "2": "Report to your superior",
+            "3": "Set up a firewall"
+        },
+        "next": {
+            "1": "trace_source",
+            "2": "report_superior",
+            "3": "setup_firewall"
+        }
+    }
+}
