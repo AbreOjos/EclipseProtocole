@@ -1,17 +1,28 @@
 import json
 
+from player import Player
+
 
 class Game:
     def __init__(self, story_file):
         with open(story_file, "r") as f:
             self.story = json.loads(f.read())
         self.current_scene = "intro"
+        self.player = Player()
 
     def play(self):
         while self.current_scene:
             scene = self.story.get(self.current_scene, {})
             print(f"\n{scene.get('text', 'No content found.')}")
 
+            # Apply any stat changes from the scene
+            if "stat_changes" in scene:
+                for stat, value in scene["stat_changes"].items():
+                    self.player.modify_stat(stat, value)
+
+            self.player.display_stats()
+
+            # Handle choices
             options = scene.get("options", {})
             if not options:
                 print("\n[End of story]")

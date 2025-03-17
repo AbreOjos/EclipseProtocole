@@ -34,4 +34,6 @@ if __name__ == "__main__":
     player = Player()
     player.modify_stat("hacking", 1)  # Level up hacking skill
     player.modify_stat("funding", -2000)  # Spend money
+    player.modify_stat("reputation", 10)
+    player.modify_stat("time_remaining", -1)
     player.display_stats()
