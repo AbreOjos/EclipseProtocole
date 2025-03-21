@@ -6,6 +6,9 @@
             "2": "Ignore the warning",
             "3": "Shut down the affected server"
         },
+        "stat_changes": {
+            "time_remaining": -1
+        },
         "next": {
             "1": "investigate_logs",
             "2": "ignore_warning",
@@ -16,7 +19,7 @@
         "text": "✅ You discover encrypted data packets being sent to an unknown server.",
         "stat_changes": {
             "analysis": 1,
-            "reputation": 10
+            "reputation": 5
         },
         "options": {
             "1": "Trace the source",
@@ -42,6 +45,75 @@
         "next": {
             "1": "investigate_logs",
             "2": "blame_department"
+        }
+    },
+    "trace_source": {
+        "text": "You attempt to trace the attacker’s encrypted packets across several servers...",
+        "stat_requirements": {
+            "hacking": 2,
+            "analysis": 3
+        },
+        "success": {
+            "text": "You skillfully isolate the attack origin in Eastern Europe. Your team is impressed.",
+            "stat_changes": {
+                "reputation": 10,
+                "hacking": 1
+            },
+            "next": "hacker_identified"
+        },
+        "failure": {
+            "text": "You fail to make sense of the packet trail. The attacker detects your probe and launches a counterattack.",
+            "stat_changes": {
+                "reputation": -10,
+                "firewall_strength": -1,
+                "time_remaining": -1
+            },
+            "next": "hacker_detected"
+        }
+    },
+    "setup_firewall": {
+        "text": "You reinforce the firewall, making future attacks more difficult.",
+        "stat_changes": {
+            "firewall_strength": 1
+        },
+        "options": {
+            "1": "Investigate further",
+            "2": "Wait for the hacker to act"
+        },
+        "next": {
+            "1": "investigate_logs",
+            "2": "wait_for_hacker"
+        }
+    },
+    "hacker_detected": {
+        "text": "The hacker realizes you are trying to trace them and launches a direct attack on your system!",
+        "stat_changes": {
+            "reputation": -10,
+            "time_remaining": -1,
+            "firewall_strength": -1
+        },
+        "options": {
+            "1": "Fight back with a counter-hack",
+            "2": "Shut down your system to avoid being tracked"
+        },
+        "next": {
+            "1": "counter_hack",
+            "2": "shutdown_escape"
+        }
+    },
+    "hacker_identified": {
+        "text": "You pinpoint the hacker's location and gain valuable intelligence.",
+        "stat_changes": {
+            "reputation": 20,
+            "time_remaining": 1
+        },
+        "options": {
+            "1": "Report the location to the authorities",
+            "2": "Attempt to take down their operation yourself"
+        },
+        "next": {
+            "1": "authorities_alerted",
+            "2": "self_attack"
         }
     }
 }
