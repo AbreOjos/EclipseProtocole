@@ -115,5 +115,38 @@
             "1": "authorities_alerted",
             "2": "self_attack"
         }
+    },
+    "counter_hack": {
+        "text": "You launch a counter-hack to breach the enemy system.",
+        "puzzle": "password_crack",
+        "puzzle_success": "enemy_breached",
+        "puzzle_failure": "counter_failed"
+    },
+    "enemy_breached": {
+        "text": "Your counter-hack succeeds! You gain valuable data and boost your reputation.",
+        "stat_changes": {
+            "reputation": 15,
+            "hacking": 1
+        },
+        "options": {
+            "1": "Continue the investigation"
+        },
+        "next": {
+            "1": "trace_source"
+        }
+    },
+    "counter_failed": {
+        "text": "The enemy system fends off your hack. Your tools are detected and blacklisted.",
+        "stat_changes": {
+            "reputation": -10,
+            "exploits": -1,
+            "time_remaining": -1
+        },
+        "options": {
+            "1": "Pull back and regroup"
+        },
+        "next": {
+            "1": "shutdown_escape"
+        }
     }
 }

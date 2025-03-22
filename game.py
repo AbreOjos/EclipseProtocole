@@ -1,6 +1,7 @@
 import json
 
 from player import Player
+from puzzles import password_crack_game
 
 
 class Game:
@@ -51,6 +52,25 @@ class Game:
             if "stat_requirements" in scene:
                 self.current_scene = self.handle_stat_check(scene)
                 continue
+
+            # Handle puzzle-based scenes
+            if "puzzle" in scene:
+                puzzle_name = scene["puzzle"]
+                if puzzle_name == "password_crack":
+                    level = self.player.skills["hacking"]
+                    difficulty = "easy" if level <= 1 else "medium" if level <= 3 else "hard"
+                    success, score = password_crack_game(difficulty)
+                    if success:
+                        self.player.modify_stat("reputation", score // 2)
+                        print(f"\n🎉 You gained +{score // 2} reputation from your success!")
+                        if score >= 30:
+                            print("🧠 Your hacking skills have improved!")
+                            self.player.modify_stat("hacking", 1)
+                        self.current_scene = scene["puzzle_success"]
+                    else:
+                        self.player.modify_stat("reputation", -5)
+                        self.current_scene = scene["puzzle_failure"]
+                    continue
 
             # Handle regular choices
             options = scene.get("options", {})
