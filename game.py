@@ -87,5 +87,6 @@ class Game:
         print("\nGame Over")
 
 if __name__ == "__main__":
+    # Just comment to check that push working
     game = Game("story.json")
     game.play()
