@@ -16,7 +16,7 @@
         }
     },
     "investigate_logs": {
-        "text": "✅ You discover encrypted data packets being sent to an unknown server.",
+        "text": "You discover encrypted data packets being sent to an unknown server.",
         "stat_changes": {
             "analysis": 1,
             "reputation": 5
@@ -33,7 +33,7 @@
         }
     },
     "ignore_warning": {
-        "text": "⚠\uFE0F You ignore the report. Hours later, a major data breach occurs.",
+        "text": "You ignore the report. Hours later, a major data breach occurs.",
         "stat_changes": {
             "reputation": -20,
             "time_remaining": -1

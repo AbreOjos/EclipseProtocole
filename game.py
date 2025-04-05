@@ -1,7 +1,21 @@
 import json
+import logging
+import sys
 
 from player import Player
 from puzzles import password_crack_game
+
+logging.basicConfig(
+    level=logging.INFO,
+    format='[%(levelname)s] %(asctime)s - %(message)s',
+    datefmt='%Y-%m-%d %H:%M:%S',
+    filename='game.log',  # 👈 Only log to file
+    filemode='w'
+    # handlers=[
+    #     logging.FileHandler('game.log'),
+    #     # logging.StreamHandler(sys.stderr)
+    # ],
+)
 
 
 class Game:
@@ -94,6 +108,7 @@ class Game:
             self.current_scene = scene["next"].get(choice, None)
 
         print("\nGame Over")
+        self.player.display_stats()
 
 if __name__ == "__main__":
     # Just comment to check that push working
