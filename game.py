@@ -59,14 +59,23 @@ class Game:
                 if puzzle_name == "password_crack":
                     level = self.player.skills["hacking"]
                     difficulty = "easy" if level <= 1 else "medium" if level <= 3 else "hard"
+
                     success, score = password_crack_game(difficulty)
+
                     if success:
                         self.player.modify_stat("reputation", score // 2)
                         print(f"\n🎉 You gained +{score // 2} reputation from your success!")
                         if score >= 30:
                             print("🧠 Your hacking skills have improved!")
                             self.player.modify_stat("hacking", 1)
-                        self.current_scene = scene["puzzle_success"]
+
+                        # Stat-based bonus scene check
+                        if score >= 40 or self.player.skills["hacking"] >= 4:
+                            print("✨ BONUS UNLOCKED: You've discovered a hidden enemy command system.")
+                            self.current_scene = "bonus_mission"
+                        else:
+                            self.current_scene = scene["puzzle_success"]
+
                     else:
                         self.player.modify_stat("reputation", -5)
                         self.current_scene = scene["puzzle_failure"]

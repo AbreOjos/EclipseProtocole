@@ -148,5 +148,20 @@
         "next": {
             "1": "shutdown_escape"
         }
+    },
+    "bonus_mission": {
+        "text": "You've unlocked a hidden backdoor into the enemy’s command system thanks to your exceptional hacking.",
+        "stat_changes": {
+            "reputation": 20,
+            "exploits": 1
+        },
+        "options": {
+            "1": "Launch a surprise counterattack",
+            "2": "Save this path for later"
+        },
+        "next": {
+            "1": "self_attack",
+            "2": "wait_for_hacker"
+        }
     }
 }
