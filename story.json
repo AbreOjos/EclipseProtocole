@@ -150,7 +150,7 @@
         }
     },
     "bonus_mission": {
-        "text": "You've unlocked a hidden backdoor into the enemy’s command system thanks to your exceptional hacking.",
+        "text": "You've unlocked a hidden backdoor into the enemy's command system thanks to your exceptional hacking.",
         "stat_changes": {
             "reputation": 20,
             "exploits": 1

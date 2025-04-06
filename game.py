@@ -9,7 +9,7 @@ logging.basicConfig(
     level=logging.INFO,
     format='[%(levelname)s] %(asctime)s - %(message)s',
     datefmt='%Y-%m-%d %H:%M:%S',
-    filename='game.log',  # 👈 Only log to file
+    filename='game.log',
     filemode='w'
     # handlers=[
     #     logging.FileHandler('game.log'),
@@ -24,6 +24,7 @@ class Game:
             self.story = json.loads(f.read())
         self.current_scene = "intro"
         self.player = Player()
+        self.decision_log = []
 
     def apply_stat_changes(self, changes):
         for stat, value in changes.items():
@@ -56,11 +57,13 @@ class Game:
             scene = self.story.get(self.current_scene, {})
             print(f"\n{scene.get('text', 'No content found.')}")
 
+            self.player.display_stats()
+
             # Apply initial stat changes for the scene
             if "stat_changes" in scene:
                 self.apply_stat_changes(scene["stat_changes"])
 
-            self.player.display_stats()
+            # self.player.display_stats()
 
             # Handle stat-based scenes
             if "stat_requirements" in scene:
@@ -105,12 +108,24 @@ class Game:
                 print(f"{key}. {value}")
 
             choice = input("> ").strip()
+
+            choice_text = options.get(choice, "Unknown")
+            self.decision_log.append(f"Scene: {self.current_scene} -> Option {choice}: {choice_text}")
+            logging.info(f"Player decision: {self.current_scene} -> {choice}: {choice_text}")
+
             self.current_scene = scene["next"].get(choice, None)
 
         print("\nGame Over")
         self.player.display_stats()
 
+        print("\n🧾 GAME SUMMARY (Your decisions):")
+        for entry in self.decision_log:
+            print(f"- {entry}")
+
+        print("\n📁 Full log saved to 'game.log'")
+
 if __name__ == "__main__":
     # Just comment to check that push working
     game = Game("story.json")
     game.play()
+
